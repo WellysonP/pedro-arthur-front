@@ -1,17 +1,16 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import BgUp from "../../assets/images/bgup.png";
 import BgDown from "../../assets/images/bgdown.png";
 
 const ContentBody = ({ children }) => {
   return (
-    <>
-      <Box>
-        <Image src={BgUp} />
-
+    <Flex bg={"white"} direction="column" alignItems="center">
+      <Image width="200vh" src={BgUp} />
+      <Flex direction="column" alignItems="center" justify="center">
         {children}
-        <Image src={BgDown} />
-      </Box>
-    </>
+      </Flex>
+      <Image src={BgDown} />
+    </Flex>
   );
 };
 

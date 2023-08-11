@@ -6,7 +6,7 @@ const PagePadding = ({ children }) => {
       <Flex
         mx="auto"
         w="100%"
-        px={{ base: "20px", sm: "48px", md: "100px", xl: "140px" }}
+        // px={{ base: "20px", sm: "48px", md: "100px", xl: "140px" }}
         maxWidth="1920px"
       >
         <Box flex="1" w="100%">

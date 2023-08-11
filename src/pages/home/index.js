@@ -1,3 +1,4 @@
+import { Flex, Box } from "@chakra-ui/react";
 import Button from "../../components/button";
 import ContentBody from "../../components/layout/content-body";
 import Container from "../../components/spaccing/container";
@@ -6,7 +7,8 @@ import TableGuests from "../../components/table";
 
 const Home = () => {
   return (
-    <>
+    <Flex height="100vh" >
+      <Box width="50vw"></Box>
       <Container>
         <PagePadding>
           <ContentBody>
@@ -16,7 +18,8 @@ const Home = () => {
           </ContentBody>
         </PagePadding>
       </Container>
-    </>
+      <Box width="50vw" ></Box>
+    </Flex>
   );
 };
 
