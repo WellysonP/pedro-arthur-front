@@ -1,4 +1,4 @@
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Heading, Text } from "@chakra-ui/react";
 import Button from "../../components/button";
 import ContentBody from "../../components/layout/content-body";
 import Container from "../../components/spaccing/container";
@@ -7,19 +7,19 @@ import TableGuests from "../../components/table";
 
 const Home = () => {
   return (
-    <Flex height="100vh" >
-      <Box width="50vw"></Box>
+    <Box >
       <Container>
         <PagePadding>
           <ContentBody>
+            <Text mt="64px" mb="24px" fontSize="20px" fontWeight="bold">Temos um total de <strong style={{color:"#5D862A"}}>50 </strong>convidados</Text>
             <TableGuests />
-            <>Home</>
+            <Box mt="24px" texAlign="center">
             <Button className="primary">Adicionar</Button>
+            </Box>
           </ContentBody>
         </PagePadding>
       </Container>
-      <Box width="50vw" ></Box>
-    </Flex>
+    </Box>
   );
 };
 

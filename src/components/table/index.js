@@ -15,7 +15,6 @@ const TableGuests = () => {
         <>
         <TableContainer>
   <Table variant='striped' colorScheme='teal'>
-    <TableCaption>Tabela de convidados</TableCaption>
     <Tbody>
       <Tr>
         <Td>inches</Td>
