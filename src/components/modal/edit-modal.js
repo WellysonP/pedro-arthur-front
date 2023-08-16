@@ -15,7 +15,7 @@ import {
 import DeleteConfirmationModal from "./delete-confirmation-modal";
 
 const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
-  const [quantity, setQuantity] = useState(guestData.qtd);
+  const [quantity, setQuantity] = useState(guestData.quantity);
   const {
     isOpen: isDeleteModalOpen,
     onOpen: openDeleteModal,
@@ -27,16 +27,18 @@ const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
   };
 
   const handleSave = () => {
-    console.log(`Quantidade atualizada - ${guestData.nome}: ${quantity}`);
+    console.log(`Quantidade atualizada - ${guestData.name}: ${quantity}`);
     onClose();
   };
+
+
 
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Editar convidado: {guestData.nome}</ModalHeader>
+          <ModalHeader>Editar convidado: {guestData.name}</ModalHeader>
           <ModalBody>
             <FormLabel>Quantidade de acompanhantes:</FormLabel>
             <Input
@@ -56,9 +58,9 @@ const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        guestName={guestData.nome}
-        onConfirm={() => {
-          onDelete(guestData.nome);
+        guestData={guestData}
+        onConfirm={async () => {
+          onDelete(guestData.name);
           closeDeleteModal();
           onClose(); // Fechar o modal de edição após a exclusão
         }}

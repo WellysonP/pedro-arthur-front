@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "../../services/index."
 import {
   Modal,
   ModalOverlay,
@@ -9,8 +10,11 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-const DeleteConfirmationModal = ({ isOpen, onClose, guestName, onConfirm }) => {
-  const confirmDelete = () => {
+const DeleteConfirmationModal = ({ isOpen, onClose, guestData, onConfirm }) => {
+  const confirmDelete = async () => {
+    await axios.delete(`deletePeople/${guestData.id}`)
+
+
     onConfirm();
     onClose();
   };
@@ -21,7 +25,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, guestName, onConfirm }) => {
       <ModalContent>
         <ModalHeader>Confirmar exclusão</ModalHeader>
         <ModalBody>
-          Tem certeza de que deseja excluir o convidado: {guestName}?
+          Tem certeza de que deseja excluir o convidado: {guestData.name}?
         </ModalBody>
         <ModalFooter>
           <Button variant="ghost" mr={3} onClick={onClose}>
