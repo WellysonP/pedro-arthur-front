@@ -28,11 +28,12 @@ const Home = () => {
     setSelectedGuest(guest);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async () => {
     setSelectedGuest(null);
+    await sumPeoples()
   };
 
-  const sumPleoples = async () => {
+  const sumPeoples = async () => {
     try {
       const sumPeoples = await axios.get('sumPeoples')
       setTotalGuest(sumPeoples.data.total)
@@ -47,11 +48,11 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await sumPleoples();
+      await sumPeoples();
     };
 
-    fetchData();
-  })
+    fetchData()
+  }, [])
 
   return (
     <Box>
@@ -74,7 +75,7 @@ const Home = () => {
             <Box mt="24px" texAlign="center">
               <Button
                 className="primary"
-                onClick={sumPleoples}
+                onClick={console.log("hello world")}
               >
                 Adicionar
               </Button>
