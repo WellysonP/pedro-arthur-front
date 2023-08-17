@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "../../services/index."
 import {
   Modal,
   ModalOverlay,
@@ -16,23 +17,22 @@ import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
 
 const AddModal = ({ isOpen, onClose }) => {
   const [name, setName] = useState("");
-  const [sugestion, setSugestion] = useState("");
+  const [suggestion, setSuggestion] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
 
-  const handleGenerateLink = () => {
+  const handleGenerateLink = async () => {
     if (name.trim() === "") {
       alert("Por favor, preencha o campo Nome da pessoa");
       return;
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      const link = `http://localhost:3000/convidado/${encodeURIComponent(name)}`;
-      setGeneratedLink(link);
-      setIsLoading(false);
-    }, 1500);
+    const response = await axios.post('register', { name: name, suggestion: suggestion })
+    const link = `http://localhost:3000/convidado/${encodeURIComponent(name)}`;
+    setGeneratedLink(link);
+    setIsLoading(false);
   };
 
   const handleCopyLink = () => {
@@ -60,9 +60,9 @@ const AddModal = ({ isOpen, onClose }) => {
           />
           <Input
             marginTop={5}
-            placeholder="Sugestão de Presente"
-            value={name}
-            onChange={(e) => setSugestion(e.target.value)}
+            placeholder="Sugestão do tamanho da fralda"
+            value={suggestion}
+            onChange={(e) => setSuggestion(e.target.value)}
           />
           <Button
             mt={4}
@@ -92,7 +92,13 @@ const AddModal = ({ isOpen, onClose }) => {
           )}
         </ModalBody>
         <ModalFooter>
-          <Button onClick={onClose}>Fechar</Button>
+          <Button onClick={
+            () => {
+              setName()
+              setSuggestion("")
+              onClose()
+            }
+          }>Fechar</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

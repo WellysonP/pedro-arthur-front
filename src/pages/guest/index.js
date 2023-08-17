@@ -66,7 +66,7 @@ const Guest = () => {
               bg="#f1f2f3"
             >
               <strong style={{ color: "#5D862A", fontSize: "32px" }}>
-                Pacotes de fraldas P
+                Pacote de fraldas P
               </strong>{" "}
             </Text>
             <Flex gap="4">

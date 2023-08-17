@@ -20,7 +20,8 @@ const Home = () => {
     setIsAddModalOpen(true);
   };
 
-  const handleCloseAddModal = () => {
+  const handleCloseAddModal = async () => {
+    await sumPeoples();
     setIsAddModalOpen(false);
   };
 
