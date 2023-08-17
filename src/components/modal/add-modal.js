@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../services/index."
 import {
   Modal,
@@ -14,13 +14,16 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
+import { color } from "framer-motion";
 
-const AddModal = ({ isOpen, onClose }) => {
+const AddModal = ({ isOpen, onClose, onReset }) => {
   const [name, setName] = useState("");
   const [suggestion, setSuggestion] = useState("");
+  let [id, setId] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
+  const baseURLApplication = process.env.REACT_APP_BASE_URL_APPLICATION
 
   const handleGenerateLink = async () => {
     if (name.trim() === "") {
@@ -30,7 +33,8 @@ const AddModal = ({ isOpen, onClose }) => {
 
     setIsLoading(true);
     const response = await axios.post('register', { name: name, suggestion: suggestion })
-    const link = `http://localhost:3000/convidado/${encodeURIComponent(name)}`;
+    let id = response.data.id
+    const link = `${baseURLApplication}${name}/${id}`;
     setGeneratedLink(link);
     setIsLoading(false);
   };
@@ -82,7 +86,7 @@ const AddModal = ({ isOpen, onClose }) => {
                 onClick={handleCopyLink}
               />
               <IconButton
-                aria-label={isLinkCopied ? "Link Copiado" : "Copiar Link"}
+                aria-label={isLinkCopied ? 1 : 0}
                 icon={isLinkCopied ? <CheckIcon /> : <CopyIcon />}
                 colorScheme={isLinkCopied ? "green" : "blue"}
                 onClick={handleCopyLink}
@@ -91,14 +95,28 @@ const AddModal = ({ isOpen, onClose }) => {
             </Stack>
           )}
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter style={{ display: "flex", justifyContent: "space-between" }}>
           <Button onClick={
             () => {
-              setName()
+              setName("")
               setSuggestion("")
+              setGeneratedLink("")
+              setIsLinkCopied(0)
+            }
+          }
+            colorScheme="teal"
+          >Resetar</Button>
+          <Button onClick={
+            () => {
+              setName("")
+              setSuggestion("")
+              setGeneratedLink("")
+              setIsLinkCopied(0)
               onClose()
             }
-          }>Fechar</Button>
+          }
+            colorScheme="red"
+          >Fechar</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
