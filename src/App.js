@@ -1,8 +1,8 @@
 import './App.css';
-import Index  from "../src/pages/index";
+import Routes  from "../src/routes";
 
 function App() {
-  return < Index />
+  return < Routes />
 }
 
 export default App;

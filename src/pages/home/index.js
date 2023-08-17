@@ -6,7 +6,8 @@ import PagePadding from "../../components/spaccing/page-padding";
 import TableGuests from "../../components/table";
 import EditModal from "../../components/modal/edit-modal";
 import { useEffect, useState } from "react";
-import axios from "../../services/index."
+import axios from "../../services/index.";
+import AddModal from "../../components/modal/add-modal";
 
 const Home = () => {
   // const guests = [
@@ -15,10 +16,18 @@ const Home = () => {
   //   { nome: "raquel", qtd: 1, status: "confirmado" },
   // ];
 
-
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedGuest, setSelectedGuest] = useState(null);
-  const [totalGuest, setTotalGuest] = useState('0')
-  const [guests, setGuests] = useState([])
+  const [totalGuest, setTotalGuest] = useState("0");
+  const [guests, setGuests] = useState([]);
+
+  const handleOpenAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setIsAddModalOpen(false);
+  };
 
   const handleDeleteGuest = (guestName) => {
     console.log(`Convidado deletado: ${guestName}`);
@@ -30,38 +39,38 @@ const Home = () => {
 
   const handleCloseModal = async () => {
     setSelectedGuest(null);
-    await sumPeoples()
+    await sumPeoples();
   };
 
   const sumPeoples = async () => {
     try {
-      const sumPeoples = await axios.get('sumPeoples')
-      setTotalGuest(sumPeoples.data.total)
+      const sumPeoples = await axios.get("sumPeoples");
+      setTotalGuest(sumPeoples.data.total);
 
-      const allGuests = await axios.get('')
-      setGuests(allGuests.data)
+      const allGuests = await axios.get("");
+      setGuests(allGuests.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       await sumPeoples();
     };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
     <Box>
       <Container>
         <PagePadding>
           <ContentBody>
-            <Text mt="64px" mb="24px" fontSize="20px" fontWeight="bold">
+            <Text textAlign="center" mt="64px" mb="24px" fontSize="20px" fontWeight="bold">
               Temos um total de{" "}
-              <strong style={{ color: "#5D862A" }}>{totalGuest} </strong>convidados
+              <strong style={{ color: "#5D862A" }}>{totalGuest} </strong>
+              convidados
             </Text>
             <TableGuests guests={guests} handleEditClick={handleEditClick} />
             {selectedGuest && (
@@ -72,14 +81,12 @@ const Home = () => {
                 onDelete={handleDeleteGuest}
               />
             )}
-            <Box mt="24px" texAlign="center">
-              <Button
-                className="primary"
-                onClick={console.log("hello world")}
-              >
+            <Box mt="24px" texAlign="center" onClick={handleOpenAddModal}>
+              <Button className="primary" onClick={handleOpenAddModal}>
                 Adicionar
               </Button>
             </Box>
+            <AddModal isOpen={isAddModalOpen} onClose={handleCloseAddModal} />
           </ContentBody>
         </PagePadding>
       </Container>
