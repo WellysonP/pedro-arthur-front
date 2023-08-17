@@ -1,11 +1,24 @@
-import { Table, Tbody, Tr, Td, TableContainer } from "@chakra-ui/react";
+import { Table, Tbody, Tr, Td, TableContainer, Input, Thead } from "@chakra-ui/react";
 import { useState } from "react";
 
-const TableGuests = ({ guests, handleEditClick }) => {
+const TableGuests = ({ guests, handleEditClick, columns }) => {
   return (
     <>
       <TableContainer width="100%" border="2px solid #7E7935">
+        {/* <Input
+          placeholder="Filtrar por nome..."
+          value={filterValue}
+          onChange={(e) => setFilterValue(e.target.value)}
+        /> */}
         <Table >
+          <Thead>
+            <Tr>
+              <Td>Nome</Td>
+              <Td>Quantidade</Td>
+              <Td>Confirmação</Td>
+              <Td>Editar</Td>
+            </Tr>
+          </Thead>
           <Tbody>
             {guests.map((guest, index) => (
               <Tr key={index} bg={index % 2 === 0 ? "#fff" : "#D9E1A5"} borderBottom={index % 2 === 0 ? "#fff" : "#7E7935"} borderTop={index % 2 === 0 ? "#fff" : "#7E7935"} h="60px">

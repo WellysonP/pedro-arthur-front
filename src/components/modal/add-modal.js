@@ -34,7 +34,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
     setIsLoading(true);
     const response = await axios.post('register', { name: name, suggestion: suggestion })
     let id = response.data.id
-    const link = `${baseURLApplication}${name}/${id}`;
+    const link = `${baseURLApplication}/${id}`;
     setGeneratedLink(link);
     setIsLoading(false);
   };
