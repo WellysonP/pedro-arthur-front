@@ -95,7 +95,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
             </Stack>
           )}
         </ModalBody>
-        <ModalFooter style={{ display: "flex", justifyContent: "space-between" }}>
+        <ModalFooter style={{ display: "flex", justifyContent: "flex-end", gap:"8px" }}>
           <Button onClick={
             () => {
               setName("")
@@ -104,7 +104,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
               setIsLinkCopied(0)
             }
           }
-            colorScheme="teal"
+            colorScheme="gray"
           >Resetar</Button>
           <Button onClick={
             () => {
@@ -115,7 +115,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
               onClose()
             }
           }
-            colorScheme="red"
+            colorScheme="gray"
           >Fechar</Button>
         </ModalFooter>
       </ModalContent>

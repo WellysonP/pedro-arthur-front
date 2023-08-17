@@ -1,15 +1,35 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../components/spaccing/container";
 import PagePadding from "../../components/spaccing/page-padding";
 import ContentBody from "../../components/layout/content-body";
 import Button from "../../components/button";
+import ConfirmPresence from "../../components/modal/confirm-pressence-modal";
+import ThankYouModal from "../../components/modal/thank-you-modal";
+
 
 const Guest = () => {
   const { name, id } = useParams();
-  console.log("name = " + name);
-  console.log("id = " + id);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+
+  const openThankYouModal = () => {
+    setIsThankYouModalOpen(true);
+  };
+
+  const closeThankYouModal = () => {
+    setIsThankYouModalOpen(false);
+  };
+
+  const openConfirmModal = () => {
+    setIsConfirmModalOpen(true);
+  };
+
+  const closeConfirmModal = () => {
+    setIsConfirmModalOpen(false);
+  };
+
 
   return (
     <Box>
@@ -70,7 +90,7 @@ const Guest = () => {
               </strong>{" "}
             </Text>
             <Flex gap="4">
-              <Button className="primary">Confirmar minha presença</Button>
+              <Button className="primary" onClick={openConfirmModal}>Confirmar minha presença</Button>
               <Button className="secondary">Mostrar localização</Button>
             </Flex>
             <Text
@@ -82,6 +102,9 @@ const Guest = () => {
             >
               EU, MAMÃE E PAPAI CONTAMOS COM A SUA PRESENÇA
             </Text>
+            <ConfirmPresence isOpen={isConfirmModalOpen} onClose={closeConfirmModal} openThankYouModal={openThankYouModal} />
+            <ThankYouModal isOpen={isThankYouModalOpen} onClose={closeThankYouModal} />
+
           </ContentBody>
         </PagePadding>
       </Container>
