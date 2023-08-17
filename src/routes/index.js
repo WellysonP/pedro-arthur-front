@@ -7,8 +7,8 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <RoutesDom>
-        <Route path="/" element={<Index />} />
-        <Route path="/convidado/:name" element={<Guest />} />
+        <Route path="/home/Amanda&Miguel" element={<Index />} />
+        <Route path="/convidado/:name/:id" element={<Guest />} />
       </RoutesDom>
     </BrowserRouter>
   );

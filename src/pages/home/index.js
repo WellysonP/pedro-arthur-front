@@ -10,11 +10,6 @@ import axios from "../../services/index.";
 import AddModal from "../../components/modal/add-modal";
 
 const Home = () => {
-  // const guests = [
-  //   { nome: "francisco", qtd: 2, status: "pendente" },
-  //   { nome: "wellyson", qtd: 5, status: "confirmado" },
-  //   { nome: "raquel", qtd: 1, status: "confirmado" },
-  // ];
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedGuest, setSelectedGuest] = useState(null);

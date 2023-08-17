@@ -7,8 +7,9 @@ import ContentBody from "../../components/layout/content-body";
 import Button from "../../components/button";
 
 const Guest = () => {
-  const { guestName } = useParams();
-  console.log(guestName);
+  const { name, id } = useParams();
+  console.log("name = " + name);
+  console.log("id = " + id);
 
   return (
     <Box>
@@ -23,7 +24,7 @@ const Guest = () => {
               py="16px"
             >
               <Text textAlign="center" fontSize="20px" fontWeight="bold">
-                {guestName}, você está convidado(a) a comemorar este dia espcial
+                {name}, você está convidado(a) a comemorar este dia espcial
               </Text>
               <Text
                 mt="8px"

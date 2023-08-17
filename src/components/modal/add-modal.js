@@ -16,6 +16,7 @@ import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
 
 const AddModal = ({ isOpen, onClose }) => {
   const [name, setName] = useState("");
+  const [sugestion, setSugestion] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
@@ -56,6 +57,12 @@ const AddModal = ({ isOpen, onClose }) => {
             placeholder="Nome do convidado"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            marginTop={5}
+            placeholder="Sugestão de Presente"
+            value={name}
+            onChange={(e) => setSugestion(e.target.value)}
           />
           <Button
             mt={4}
