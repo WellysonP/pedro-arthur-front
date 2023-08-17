@@ -1,5 +1,5 @@
-// EditModal.js
 import React, { useState } from "react";
+import axios from "../../services/index."
 import {
   Modal,
   ModalOverlay,
@@ -26,7 +26,8 @@ const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
     openDeleteModal();
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    const response = await axios.put(`confirmed/${guestData.id}`, { isConfirmed: guestData.isConfirmed, quantity: quantity })
     console.log(`Quantidade atualizada - ${guestData.name}: ${quantity}`);
     onClose();
   };
