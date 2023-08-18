@@ -21,21 +21,18 @@ const Guest = () => {
   const [totalPeoples, setTotalPeoples] = useState(0)
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const guest = await axios.get(`people/${id}`)
-        if (guest.data == null || guest.data == undefined) {
-          navigate("/")
-        } else {
-          setGuest(guest.data)
-        }
-      } catch (error) {
+  const getGuest = async () => {
+    try {
+      const guest = await axios.get(`people/${id}`)
+      if (guest.data == null || guest.data == undefined) {
         navigate("/")
+      } else {
+        setGuest(guest.data)
       }
+    } catch (error) {
+      navigate("/")
     }
-    fetchData()
-  }, [])
+  }
 
   const openThankYouModal = () => {
     setIsThankYouModalOpen(true);
@@ -68,7 +65,7 @@ const Guest = () => {
     setIsConfirmModalOpen(true);
   };
 
-  useEffect(() => { }, [totalPeoples])
+  useEffect(() => { getGuest() }, [isThankYouModalOpen])
 
   return (
     <Box>
