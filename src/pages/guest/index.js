@@ -77,7 +77,7 @@ const Guest = () => {
         <PagePadding>
           <ContentBody>
             <Box
-              mt="64px"
+              mt="24px"
               borderBottom="1px solid #000"
               borderTop="1px solid #000"
               style={{ borderStyle: "dashed" }}

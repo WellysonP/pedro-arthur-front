@@ -65,7 +65,7 @@ const Home = () => {
           <ContentBody>
             <Text textAlign="center" mt="64px" mb="24px" fontSize="20px" fontWeight="bold">
               Temos um total de{" "}
-              <strong style={{ color: "#5D862A" }}>{totalGuest} </strong>
+              <strong style={{ color: "#5D862A", fontFamily: "Gluten, cursive" }}>{totalGuest} </strong>
               convidados
             </Text>
             <TableGuests guests={guests} handleEditClick={handleEditClick} />
