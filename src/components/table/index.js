@@ -1,32 +1,45 @@
-import { Table, Tbody, Tr, Td, TableContainer, Input, Thead } from "@chakra-ui/react";
+import { Table, Tbody, Tr, Td, Th, TableContainer, Input, Thead } from "@chakra-ui/react";
 import { useState } from "react";
 
 const TableGuests = ({ guests, handleEditClick, columns }) => {
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedData = [...guests].sort((a, b) => {
+    if (a[sortConfig.key] < b[sortConfig.key]) {
+      return sortConfig.direction === 'ascending' ? -1 : 1;
+    }
+    if (a[sortConfig.key] > b[sortConfig.key]) {
+      return sortConfig.direction === 'ascending' ? 1 : -1;
+    }
+    return 0;
+  });
   return (
     <>
       <TableContainer width="100%" border="2px solid #7E7935">
-        {/* <Input
-          placeholder="Filtrar por nome..."
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-        /> */}
         <Table >
           <Thead>
             <Tr>
-              <Td>Nome</Td>
-              <Td>Quantidade</Td>
-              <Td>Confirmação</Td>
-              <Td>Editar</Td>
+              <Th onClick={() => requestSort('name')}>Nome</Th>
+              <Th onClick={() => requestSort('quantity')}>Quantidade</Th>
+              <Th onClick={() => requestSort('isConfirmed')} >Confirmação</Th>
+              <Th>Editar</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {guests.map((guest, index) => (
-              <Tr key={index} bg={index % 2 === 0 ? "#fff" : "#D9E1A5"} borderBottom={index % 2 === 0 ? "#fff" : "#7E7935"} borderTop={index % 2 === 0 ? "#fff" : "#7E7935"} h="60px">
-                <Td fontWeight="bold">{guest.name}</Td>
-                <Td fontWeight="bold">{guest.quantity}</Td>
-                <Td fontWeight="bold" color={guest.isConfirmed === 0 ? "#D88000" : "#584F4A"}>{guest.isConfirmed === 0 ? "Pendente" : "Confirmado"}</Td>
+            {sortedData.map((item, index) => (
+              <Tr key={item.id} bg={index % 2 === 0 ? "#fff" : "#D9E1A5"} borderBottom={index % 2 === 0 ? "#fff" : "#7E7935"} borderTop={index % 2 === 0 ? "#fff" : "#7E7935"} h="60px">
+                <Td fontWeight="bold">{item.name}</Td>
+                <Td fontWeight="bold">{item.quantity}</Td>
+                <Td fontWeight="bold" color={item.isConfirmed === 0 ? "#D88000" : "#584F4A"}>{item.isConfirmed === 0 ? "Pendente" : "Confirmado"}</Td>
                 <Td>
-                  <button style={{ background: "#9A5B0D", borderRadius: "8px" }} onClick={() => handleEditClick(guest)}>Editar</button>
+                  <button style={{ background: "#9A5B0D", borderRadius: "8px" }} onClick={() => handleEditClick(item)}>Editar</button>
                 </Td>
               </Tr>
             ))}
