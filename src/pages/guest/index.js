@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Container from "../../components/spaccing/container";
 import PagePadding from "../../components/spaccing/page-padding";
 import ContentBody from "../../components/layout/content-body";
@@ -8,6 +8,7 @@ import Button from "../../components/button";
 import axios from "../../services/index."
 
 const Guest = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const [guest, setGuest] = useState("")
@@ -17,21 +18,23 @@ const Guest = () => {
     const fetchData = async () => {
       try {
         const guest = await axios.get(`people/${id}`)
-        setGuest(guest.data)
+        if (guest.data == null || guest.data == undefined) {
+          navigate("/")
+        } else {
+          setGuest(guest.data)
+        }
       } catch (error) {
-        setGuest("")
+        navigate("/")
       }
     }
     fetchData()
   }, [])
-
 
   return (
     <Box>
       <Container>
         <PagePadding>
           <ContentBody>
-            {guest === "" ? "Hello" : "fail"}
             <Box
               mt="64px"
               borderBottom="1px solid #000"

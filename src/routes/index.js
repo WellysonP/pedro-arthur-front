@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes as RoutesDom, Route } from "react-router-dom";
 import Index from "../pages/home";
 import Guest from "../pages/guest";
+import Error from "../pages/error"
 
 export default function Routes() {
   return (
@@ -9,7 +10,14 @@ export default function Routes() {
       <RoutesDom>
         <Route path="/home/Amanda&Miguel" element={<Index />} />
         <Route path="/guest/:id" element={<Guest />} />
+        <Route path="/*" element={<Error />} />
       </RoutesDom>
     </BrowserRouter>
   );
 }
+
+// export function confirmId({ guest }) {
+//   if (guest == undefined || guest == null || guest == "") {
+//     return <Redirect to="/*" />;
+//   }
+// }
