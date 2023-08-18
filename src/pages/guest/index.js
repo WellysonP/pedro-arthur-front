@@ -128,31 +128,36 @@ const Guest = () => {
             <Flex gap="4">
               <Button className={guest.isConfirmed == 0 ? "primary" : "secondary"} onClick={openConfirmModal}>
                 {guest.isConfirmed === 0 ? (
-                  <>
-                    <div>Confirmar </div>
+                  <div style={{ fontWeight: "bold" }}>
+                    <div >Confirmar </div>
                     <div>presença!</div>
-                  </>
+                  </div>
+
                 ) : (
-                  <>
+                  <div style={{ fontWeight: "bold" }}>
                     <div>Disponível</div>
                     <div>{guest.quantity} senhas</div>
-                  </>
+                  </div>
+
                 )}
               </Button>
               <Button
                 className="secondary">
-                <div>Mostrar</div>
-                <div>localização!</div>
+                <div style={{ fontWeight: "bold" }}>
+                  <div>Mostrar</div>
+                  <div>localização!</div>
+                </div>
               </Button>
             </Flex>
             <Text
               mt="24px"
               mb="40px"
               textAlign="center"
-              fontSize="20px"
+              fontSize="18px"
               fontWeight="bold"
             >
-              EU, MAMÃE E PAPAI CONTAMOS COM A SUA PRESENÇA
+              <div>EU, MAMÃE E PAPAI CONTAMOS </div>
+              <div>COM A SUA PRESENÇA</div>
             </Text>
             <ConfirmPresence isOpen={isConfirmModalOpen} onClose={closeConfirmModal} openConfirmModal2Factor={openConfirmModal2Factor} />
             <ConfirmPresence2Factor isOpen={isConfirmModal2FactorOpen} onClose={closeConfirmModal2Factor} openThankYouModal={openThankYouModal} totalPeoples={totalPeoples} guest={guest} />
