@@ -5,11 +5,6 @@ const TableGuests = ({ guests, handleEditClick, columns }) => {
   return (
     <>
       <TableContainer width="100%" border="2px solid #7E7935">
-        {/* <Input
-          placeholder="Filtrar por nome..."
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-        /> */}
         <Table >
           <Thead>
             <Tr>
