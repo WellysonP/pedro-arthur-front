@@ -10,12 +10,26 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-const ConfirmPresence = ({ isOpen, onClose, openThankYouModal }) => {
-  const [numberOfPeople, setNumberOfPeople] = useState(0);
+const ConfirmPresence = ({ isOpen, onClose, openConfirmModal2Factor }) => {
+  const [numberOfPeople, setNumberOfPeople] = useState("");
+  const parsedNumber = parseInt(numberOfPeople);
 
   const handleConfirm = () => {
-    onClose();
-    openThankYouModal()
+
+    if (isNaN(parsedNumber) || parsedNumber <= 0) {
+
+    } else {
+      onClose();
+      setNumberOfPeople("")
+      openConfirmModal2Factor(parsedNumber);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    if (/^\d*$/.test(inputValue)) {
+      setNumberOfPeople(inputValue);
+    }
   };
 
   return (
@@ -25,14 +39,14 @@ const ConfirmPresence = ({ isOpen, onClose, openThankYouModal }) => {
         <ModalHeader>Confirmar Presença</ModalHeader>
         <ModalBody>
           <Input
-            type="number"
-            placeholder="Quantidade de acompanhantes"
+            type="text"
+            placeholder="Total de pessoas"
             value={numberOfPeople}
-            onChange={(e) => setNumberOfPeople(e.target.value)}
+            onChange={handleInputChange}
           />
         </ModalBody>
         <ModalFooter style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
-          <Button onClick={handleConfirm} colorScheme="green">
+          <Button onClick={handleConfirm} colorScheme={(isNaN(parsedNumber) || parsedNumber <= 0) ? "gray" : "green"}>
             Confirmar
           </Button>
           <Button onClick={onClose} colorScheme="gray">

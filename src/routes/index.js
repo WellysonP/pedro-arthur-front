@@ -15,9 +15,3 @@ export default function Routes() {
     </BrowserRouter>
   );
 }
-
-// export function confirmId({ guest }) {
-//   if (guest == undefined || guest == null || guest == "") {
-//     return <Redirect to="/*" />;
-//   }
-// }

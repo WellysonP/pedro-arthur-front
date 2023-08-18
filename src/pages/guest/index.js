@@ -8,12 +8,17 @@ import Button from "../../components/button";
 import axios from "../../services/index."
 import ConfirmPresence from "../../components/modal/confirm-pressence-modal";
 import ThankYouModal from "../../components/modal/thank-you-modal";
+import ConfirmPresence2Factor from "../../components/modal/confirm-pressence-2factor-modal";
+
 
 const Guest = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isConfirmModal2FactorOpen, setIsConfirmModal2FactorOpen] = useState(false);
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
   const [guest, setGuest] = useState("")
+  const [totalPeoples, setTotalPeoples] = useState(0)
 
 
   useEffect(() => {
@@ -32,26 +37,38 @@ const Guest = () => {
     fetchData()
   }, [])
 
-const Guest = () => {
-  const { name, id } = useParams();
-  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
-
   const openThankYouModal = () => {
     setIsThankYouModalOpen(true);
   };
 
   const closeThankYouModal = () => {
-    setIsThankYouModalOpen(false);
+    setIsThankYouModalOpen(false)
+    setIsConfirmModalOpen(false)
+    setTotalPeoples("")
   };
 
   const openConfirmModal = () => {
-    setIsConfirmModalOpen(true);
+    if (guest.isConfirmed == 0) {
+      setIsConfirmModalOpen(true);
+    }
   };
 
   const closeConfirmModal = () => {
     setIsConfirmModalOpen(false);
   };
+
+  const openConfirmModal2Factor = (numberOfPeople) => {
+    setIsConfirmModalOpen(false);
+    setTotalPeoples(numberOfPeople)
+    setIsConfirmModal2FactorOpen(true);
+  };
+
+  const closeConfirmModal2Factor = () => {
+    setIsConfirmModal2FactorOpen(false);
+    setIsConfirmModalOpen(true);
+  };
+
+  useEffect(() => { }, [totalPeoples])
 
   return (
     <Box>
@@ -112,8 +129,24 @@ const Guest = () => {
               </strong>{" "}
             </Text>
             <Flex gap="4">
-              <Button className="primary" onClick={openConfirmModal}>Confirmar minha presença</Button>
-              <Button className="secondary">Mostrar localização</Button>
+              <Button className={guest.isConfirmed == 0 ? "primary" : "secondary"} onClick={openConfirmModal}>
+                {guest.isConfirmed === 0 ? (
+                  <>
+                    <div>Confirmar </div>
+                    <div>presença!</div>
+                  </>
+                ) : (
+                  <>
+                    <div>Disponível</div>
+                    <div>{guest.quantity} senhas</div>
+                  </>
+                )}
+              </Button>
+              <Button
+                className="secondary">
+                <div>Mostrar</div>
+                <div>localização!</div>
+              </Button>
             </Flex>
             <Text
               mt="24px"
@@ -124,14 +157,15 @@ const Guest = () => {
             >
               EU, MAMÃE E PAPAI CONTAMOS COM A SUA PRESENÇA
             </Text>
-            <ConfirmPresence isOpen={isConfirmModalOpen} onClose={closeConfirmModal} openThankYouModal={openThankYouModal} />
-            <ThankYouModal isOpen={isThankYouModalOpen} onClose={closeThankYouModal} />
-
+            <ConfirmPresence isOpen={isConfirmModalOpen} onClose={closeConfirmModal} openConfirmModal2Factor={openConfirmModal2Factor} />
+            <ConfirmPresence2Factor isOpen={isConfirmModal2FactorOpen} onClose={closeConfirmModal2Factor} openThankYouModal={openThankYouModal} totalPeoples={totalPeoples} guest={guest} />
+            <ThankYouModal isOpen={isThankYouModalOpen} onClose={closeThankYouModal} totalPeoples={totalPeoples} />
           </ContentBody>
         </PagePadding>
       </Container>
     </Box>
   );
 };
+
 
 export default Guest;

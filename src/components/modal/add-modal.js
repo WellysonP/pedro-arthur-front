@@ -95,7 +95,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
             </Stack>
           )}
         </ModalBody>
-        <ModalFooter style={{ display: "flex", justifyContent: "flex-end", gap:"8px" }}>
+        <ModalFooter style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
           <Button onClick={
             () => {
               setName("")

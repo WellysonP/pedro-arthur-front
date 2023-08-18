@@ -9,14 +9,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const ThankYouModal = ({ isOpen, onClose }) => {
+const ThankYouModal = ({ isOpen, onClose, totalPeoples }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Agradecemos sua presença!</ModalHeader>
         <ModalBody>
-          Obrigado por confirmar sua presença. Estamos ansiosos para vê-lo!
+          Obrigado pela confirmação de presença. Estamos ansiosos para vê-lo{totalPeoples == 1 ? "" : "s"}!
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" onClick={onClose}>
