@@ -50,6 +50,10 @@ const Guest = () => {
     }
   };
 
+  const openLocation = () => {
+    window.location.replace("https://www.google.com/maps/place/6%C2%B049'22.8%22S+35%C2%B028'27.8%22W/@-6.823005,-35.474377,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-6.823005!4d-35.474377?entry=ttu")
+  }
+
   const closeConfirmModal = () => {
     setIsConfirmModalOpen(false);
   };
@@ -79,8 +83,8 @@ const Guest = () => {
               style={{ borderStyle: "dashed" }}
               py="16px"
             >
-              <Text textAlign="center" fontSize="20px" fontWeight="bold">
-                {guest.name}, estamos te convidando para comemorar esse dia especial conosco, contamos com sua presença.
+              <Text textAlign="center" fontSize="20px" fontWeight="semibold">
+                Olá <strong style={{ fontWeight: "black" }}>{guest.name}</strong>, estamos te convidando para comemorar esse dia especial conosco, contamos com sua presença.
               </Text>
               <Text
                 mt="8px"
@@ -100,7 +104,7 @@ const Guest = () => {
                 mt="8px"
                 textAlign="center"
                 fontSize="20px"
-                fontWeight="bold"
+                fontWeight="semibold"
               >
                 SÍTIO NOVO HORIZONTE (NA SAÍDA PARA PIRPIRITUBA, EM FRENTE AO
                 GRUPO CENTRO CENTRY)
@@ -109,7 +113,7 @@ const Guest = () => {
 
             <Text mt="8px" textAlign="center" fontSize="20px" fontWeight="bold">
               <strong style={{ color: "#D88000", fontSize: "24px" }}>
-                Sugestão de presente
+                Sugestão de presente:
               </strong>{" "}
             </Text>
             <Text
@@ -141,8 +145,7 @@ const Guest = () => {
 
                 )}
               </Button>
-              <Button
-                className="secondary">
+              <Button className="secondary" onClick={openLocation}>
                 <div style={{ fontWeight: "bold" }}>
                   <div>Mostrar</div>
                   <div>localização!</div>
