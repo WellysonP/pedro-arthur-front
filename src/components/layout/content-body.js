@@ -8,8 +8,8 @@ const ContentBody = ({ children }) => {
     <Flex bg="white" direction="column" alignItems="center" pos="relative" maxW="650px" minH="100vh" h="100%" m="0 auto" padding="32px 24px">
       <Image width="100%" pos="absolute" top="0" src={BgUp} />
       <Image width="100%" pos="absolute" bottom="0" src={BgDown} />
-      <Flex direction="column" width="100%" h="100%" padding="96px 16px 40px 16px" alignItems="center" justify="flex-start" border="12px solid #7E7935" borderRadius="999px 999px 0px 0px"  >
-        <Image width="350px" src={PedroArthur} />
+      <Flex direction="column" width="100%" h="100%" padding="110px 16px 40px 16px" alignItems="center" justify="flex-start" border="12px solid #7E7935" borderRadius="999px 999px 0px 0px"  >
+        <Image width="400px" src={PedroArthur} />
         {children}
       </Flex>
     </Flex>

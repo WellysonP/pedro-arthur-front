@@ -107,7 +107,7 @@ const Guest = () => {
                 fontWeight="semibold"
               >
                 SÍTIO NOVO HORIZONTE (NA SAÍDA PARA PIRPIRITUBA, EM FRENTE AO
-                GRUPO CENTRO CENTRY)
+                GRUPO CENTRY)
               </Text>
             </Box>
 
