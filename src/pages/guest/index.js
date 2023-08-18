@@ -1,21 +1,37 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "../../components/spaccing/container";
 import PagePadding from "../../components/spaccing/page-padding";
 import ContentBody from "../../components/layout/content-body";
 import Button from "../../components/button";
+import axios from "../../services/index."
 
 const Guest = () => {
-  const { name, id } = useParams();
-  console.log("name = " + name);
-  console.log("id = " + id);
+  const { id } = useParams();
+
+  const [guest, setGuest] = useState("")
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const guest = await axios.get(`people/${id}`)
+        setGuest(guest.data)
+      } catch (error) {
+        setGuest("")
+      }
+    }
+    fetchData()
+  }, [])
+
 
   return (
     <Box>
       <Container>
         <PagePadding>
           <ContentBody>
+            {guest === "" ? "Hello" : "fail"}
             <Box
               mt="64px"
               borderBottom="1px solid #000"
@@ -24,7 +40,7 @@ const Guest = () => {
               py="16px"
             >
               <Text textAlign="center" fontSize="20px" fontWeight="bold">
-                {name}, você está convidado(a) a comemorar este dia espcial
+                {guest.name}, estamos te convidando para comemorar esse dia especial conosco, contamos com sua presença.
               </Text>
               <Text
                 mt="8px"
@@ -35,7 +51,7 @@ const Guest = () => {
                 <strong style={{ color: "#5D862A", fontSize: "32px" }}>
                   24/09
                 </strong>{" "}
-                ás{" "}
+                às{" "}
                 <strong style={{ color: "#5D862A", fontSize: "32px" }}>
                   15:00h
                 </strong>
@@ -66,7 +82,7 @@ const Guest = () => {
               bg="#f1f2f3"
             >
               <strong style={{ color: "#5D862A", fontSize: "32px" }}>
-                Pacote de fraldas P
+                Pacote de fraldas {guest.suggestion}
               </strong>{" "}
             </Text>
             <Flex gap="4">
