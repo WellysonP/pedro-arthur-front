@@ -41,13 +41,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
 
   const handleCopyLink = () => {
     if (generatedLink) {
-      const input = document.createElement("input");
-      input.value = generatedLink;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand("copy");
-      document.body.removeChild(input);
-      setIsLinkCopied(true);
+      navigator.clipboard.writeText(generatedLink)
     }
   };
 

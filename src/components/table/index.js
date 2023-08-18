@@ -23,23 +23,25 @@ const TableGuests = ({ guests, handleEditClick, columns }) => {
   return (
     <>
       <TableContainer width="100%" border="2px solid #7E7935">
-        <Table >
+        <Table size="sm">
           <Thead>
-            <Tr>
+            <Tr style={{ height: "30px" }}>
               <Th onClick={() => requestSort('name')}>Nome</Th>
-              <Th onClick={() => requestSort('quantity')}>Quantidade</Th>
+              <Th onClick={() => requestSort('quantity')}>Qtd.</Th>
               <Th onClick={() => requestSort('isConfirmed')} >Confirmação</Th>
+              <Th onClick={() => requestSort('suggestion')} >Sugestão</Th>
               <Th>Editar</Th>
             </Tr>
           </Thead>
           <Tbody>
             {sortedData.map((item, index) => (
-              <Tr key={item.id} bg={index % 2 === 0 ? "#fff" : "#D9E1A5"} borderBottom={index % 2 === 0 ? "#fff" : "#7E7935"} borderTop={index % 2 === 0 ? "#fff" : "#7E7935"} h="60px">
+              <Tr key={item.id} bg={index % 2 === 0 ? "#fff" : "#D9E1A5"} borderBottom={index % 2 === 0 ? "#fff" : "#7E7935"} borderTop={index % 2 === 0 ? "#fff" : "#7E7935"}>
                 <Td fontWeight="bold">{item.name}</Td>
                 <Td fontWeight="bold">{item.quantity}</Td>
                 <Td fontWeight="bold" color={item.isConfirmed === 0 ? "#D88000" : "#584F4A"}>{item.isConfirmed === 0 ? "Pendente" : "Confirmado"}</Td>
-                <Td>
-                  <button style={{ background: "#9A5B0D", borderRadius: "8px" }} onClick={() => handleEditClick(item)}>Editar</button>
+                <Td fontWeight="bold">{item.suggestion}</Td>
+                <Td style={{ padding: "4px" }}>
+                  <button style={{ background: "#9A5B0D", borderRadius: "8px", height: "30px", fontSize: "12px", display: "flex", justifyContent: "center", alignItems: "center" }} onClick={() => handleEditClick(item)}>Editar</button>
                 </Td>
               </Tr>
             ))}
