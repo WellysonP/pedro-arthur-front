@@ -83,8 +83,8 @@ const Guest = () => {
               style={{ borderStyle: "dashed" }}
               py="16px"
             >
-              <Text textAlign="center" fontSize="20px" fontWeight="semibold">
-                Olá <strong style={{ fontWeight: "black" }}>{guest.name}</strong>, estamos te convidando para comemorar esse dia especial conosco, contamos com sua presença.
+              <Text textAlign="center" fontSize="19px" fontWeight="semibold" style={{ fontFamily: "Gluten, cursive" }}>
+                Olá <strong style={{ fontWeight: "black", fontSize: "24px" }}>{guest.name}</strong>, estamos te convidando para comemorar esse dia especial conosco, contamos com sua presença.
               </Text>
               <Text
                 mt="8px"
@@ -92,19 +92,22 @@ const Guest = () => {
                 fontSize="20px"
                 fontWeight="bold"
               >
-                <strong style={{ color: "#5D862A", fontSize: "32px" }}>
-                  24/09
-                </strong>{" "}
-                às{" "}
-                <strong style={{ color: "#5D862A", fontSize: "32px" }}>
-                  15:00h
-                </strong>
+                <div style={{ fontFamily: "Gluten, cursive" }}>
+                  <strong style={{ color: "#5D862A", fontSize: "38px" }}>
+                    24/09
+                  </strong>{" "}
+                  às{" "}
+                  <strong style={{ color: "#5D862A", fontSize: "38px" }}>
+                    15:00h
+                  </strong>
+                </div>
               </Text>
               <Text
                 mt="8px"
                 textAlign="center"
                 fontSize="20px"
                 fontWeight="semibold"
+                style={{ fontFamily: "Gluten, cursive" }}
               >
                 SÍTIO NOVO HORIZONTE (NA SAÍDA PARA PIRPIRITUBA, EM FRENTE AO
                 GRUPO CENTRY)
@@ -112,7 +115,7 @@ const Guest = () => {
             </Box>
 
             <Text mt="8px" textAlign="center" fontSize="20px" fontWeight="bold">
-              <strong style={{ color: "#D88000", fontSize: "24px" }}>
+              <strong style={{ color: "#D88000", fontSize: "26px", fontFamily: "Gluten, cursive" }}>
                 Sugestão de presente:
               </strong>{" "}
             </Text>
@@ -125,7 +128,7 @@ const Guest = () => {
               borderRadius="9999px"
               bg="#f1f2f3"
             >
-              <strong style={{ color: "#5D862A", fontSize: "32px" }}>
+              <strong style={{ color: "#5D862A", fontSize: "38px", fontFamily: "Gluten, cursive" }}>
                 Pacote de fraldas {guest.suggestion}
               </strong>{" "}
             </Text>
@@ -159,8 +162,8 @@ const Guest = () => {
               fontSize="18px"
               fontWeight="bold"
             >
-              <div>EU, MAMÃE E PAPAI CONTAMOS </div>
-              <div>COM A SUA PRESENÇA</div>
+              <div style={{ fontFamily: "Gluten, cursive" }}>EU, MAMÃE E PAPAI CONTAMOS </div>
+              <div style={{ fontFamily: "Gluten, cursive" }}>COM A SUA PRESENÇA</div>
             </Text>
             <ConfirmPresence isOpen={isConfirmModalOpen} onClose={closeConfirmModal} openConfirmModal2Factor={openConfirmModal2Factor} />
             <ConfirmPresence2Factor isOpen={isConfirmModal2FactorOpen} onClose={closeConfirmModal2Factor} openThankYouModal={openThankYouModal} totalPeoples={totalPeoples} guest={guest} />
