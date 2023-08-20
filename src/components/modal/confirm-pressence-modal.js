@@ -43,6 +43,7 @@ const ConfirmPresence = ({ isOpen, onClose, openConfirmModal2Factor }) => {
             placeholder="Total de pessoas"
             value={numberOfPeople}
             onChange={handleInputChange}
+            inputMode="numeric"
           />
         </ModalBody>
         <ModalFooter style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>

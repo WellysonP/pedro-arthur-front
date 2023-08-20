@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "../../services/index."
 import {
   Modal,
@@ -9,21 +9,29 @@ import {
   ModalBody,
   Button,
   Input,
-  useDisclosure,
   IconButton,
   Stack,
 } from "@chakra-ui/react";
 import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
-import { color } from "framer-motion";
+import image from "../../assets/images/pedro.png"
+import { WhatsappShareButton, WhatsappIcon } from "react-share"
+import { saveAs } from 'file-saver';
 
 const AddModal = ({ isOpen, onClose, onReset }) => {
   const [name, setName] = useState("");
   const [suggestion, setSuggestion] = useState("");
-  let [id, setId] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
   const baseURLApplication = process.env.REACT_APP_BASE_URL_APPLICATION
+
+  const handleShareImage = () => {
+    const blob = fetch(image).then((r) => r.blob());
+    blob.then((imageBlob) => {
+      const imageUrl = URL.createObjectURL(imageBlob);
+      saveAs(imageUrl, 'minha-imagem.jpg');
+    });
+  };
 
   const handleGenerateLink = async () => {
     if (name.trim() === "") {
@@ -36,6 +44,7 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
     let id = response.data.id
     const link = `${baseURLApplication}/${id}`;
     setGeneratedLink(link);
+    const responseLink = await axios.put(`confirmed/${id}`, { isconfirmed: 0, quantity: 0, generatedLink: link })
     setIsLoading(false);
   };
 
@@ -79,13 +88,20 @@ const AddModal = ({ isOpen, onClose, onReset }) => {
                 pr="4.5rem"
                 onClick={handleCopyLink}
               />
-              <IconButton
-                aria-label={isLinkCopied ? 1 : 0}
-                icon={isLinkCopied ? <CheckIcon /> : <CopyIcon />}
-                colorScheme={isLinkCopied ? "green" : "blue"}
-                onClick={handleCopyLink}
-                isDisabled={isLinkCopied}
-              />
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <IconButton
+                  aria-label={isLinkCopied ? 1 : 0}
+                  icon={isLinkCopied ? <CheckIcon /> : <CopyIcon />}
+                  colorScheme={isLinkCopied ? "green" : "blue"}
+                  onClick={handleCopyLink}
+                  isDisabled={isLinkCopied}
+                />
+                <div style={{ height: "40px", width: "40px", display: "flex", justifyContent: "center", alignItems: "center", paddingLeft: "12px" }}>
+                  <WhatsappShareButton url={generatedLink} title="Convite chá de bebe" separator=": ">
+                    <WhatsappIcon borderRadius={8} size={40}></WhatsappIcon>
+                  </WhatsappShareButton>
+                </div>
+              </div>
             </Stack>
           )}
         </ModalBody>
