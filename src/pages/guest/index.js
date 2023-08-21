@@ -9,6 +9,7 @@ import axios from "../../services/index."
 import ConfirmPresence from "../../components/modal/confirm-pressence-modal";
 import ThankYouModal from "../../components/modal/thank-you-modal";
 import ConfirmPresence2Factor from "../../components/modal/confirm-pressence-2factor-modal";
+import { Helmet } from "react-helmet";
 
 
 const Guest = () => {
@@ -73,6 +74,11 @@ const Guest = () => {
 
   return (
     <Box>
+      <Helmet>
+        <title>Sobre - React Router com Helmet</title>
+        <meta property="og:image" content="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png" />
+        <meta property="twitter:image" content="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_dark_1x_r5.png" />
+      </Helmet>
       <Container>
         <PagePadding>
           <ContentBody>
