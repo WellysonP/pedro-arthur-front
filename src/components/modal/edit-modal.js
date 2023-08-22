@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../services/index."
-import { WhatsappShareButton, WhatsappIcon } from "react-share"
 import {
   Modal,
   ModalOverlay,
@@ -16,9 +15,9 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import DeleteConfirmationModal from "./delete-confirmation-modal";
-import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
+import { CopyIcon, CheckIcon, DownloadIcon } from "@chakra-ui/icons";
 
-const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
+const EditModal = ({ isOpen, onDelete, onClose, guestData, onDownload, onId, onClickDownload }) => {
   const [quantity, setQuantity] = useState(guestData.quantity);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
   const {
@@ -49,7 +48,10 @@ const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
     setQuantity(numericValue);
   };
 
-
+  useEffect(() => {
+    onDownload(true)
+    onId(guestData.id)
+  }, [])
 
   return (
     <>
@@ -81,10 +83,14 @@ const EditModal = ({ isOpen, onDelete, onClose, guestData }) => {
                     onClick={handleCopyLink}
                     isDisabled={isLinkCopied}
                   />
-                  <div style={{ height: "40px", width: "40px", display: "flex", justifyContent: "center", alignItems: "center", paddingLeft: "12px" }}>
-                    <WhatsappShareButton url={guestData.generatedLink} title="Convite chá de bebe" separator=": " >
-                      <WhatsappIcon borderRadius={8} size={40}></WhatsappIcon>
-                    </WhatsappShareButton>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", paddingLeft: "12px" }}>
+                    <Button onClick={
+                      () => {
+                        onClickDownload()
+                      }
+                    }>
+                      <DownloadIcon />
+                    </Button>
                   </div>
                 </div>
               </Stack>

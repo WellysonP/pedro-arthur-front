@@ -138,7 +138,7 @@ const Guest = () => {
                 Pacote de fraldas {guest.suggestion}
               </strong>{" "}
             </Text>
-            <Flex gap="4">
+            <Flex gap="4" mt="5">
               <Button className={guest.isConfirmed == 0 ? "primary" : "secondary"} onClick={openConfirmModal}>
                 {guest.isConfirmed === 0 ? (
                   <div style={{ fontWeight: "bold" }}>
