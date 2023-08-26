@@ -1,7 +1,7 @@
-import { Table, Tbody, Tr, Td, Th, TableContainer, Input, Thead } from "@chakra-ui/react";
+import { Table, Tbody, Tr, Td, Th, TableContainer, Thead } from "@chakra-ui/react";
 import { useState } from "react";
 
-const TableGuests = ({ guests, handleEditClick, columns }) => {
+const TableGuests = ({ guests, handleEditClick }) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   const requestSort = (key) => {
     let direction = 'ascending';
@@ -28,8 +28,8 @@ const TableGuests = ({ guests, handleEditClick, columns }) => {
             <Tr style={{ height: "30px" }}>
               <Th onClick={() => requestSort('name')}>Nome</Th>
               <Th onClick={() => requestSort('quantity')}>Qtd.</Th>
-              <Th onClick={() => requestSort('isConfirmed')} >Confirmação</Th>
-              <Th onClick={() => requestSort('suggestion')} >Sugestão</Th>
+              <Th onClick={() => requestSort('isConfirmed')} >CONF.</Th>
+              <Th onClick={() => requestSort('suggestion')} >SUG.</Th>
               <Th>Editar</Th>
             </Tr>
           </Thead>

@@ -114,6 +114,7 @@ const Home = () => {
                     Adicionar
                   </Button>
                 </Box>
+                <Box style={{ height: "100px" }}></Box>
               </>
               : <>
                 <Box
